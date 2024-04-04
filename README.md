@@ -1,5 +1,7 @@
 DailyDo - Aplikacja do tworzenia nawyków
 
-Link do figma: https://www.figma.com/file/fWNwTVOgKCPMvChldsmi5D/DailyDo---projekt-aplikacji?type=design&node-id=0-1&mode=design&t=rUJ7pcK89oHx74Q8-0
+Link do prototypu: https://www.figma.com/file/fWNwTVOgKCPMvChldsmi5D/DailyDo---projekt-aplikacji?type=design&node-id=0-1&mode=design&t=rUJ7pcK89oHx74Q8-0
 
-DailyDo to mobilna aplikacja, która pomaga w tworzeniu, monitorowaniu i utrzymywaniu nawyków. Dzięki integracji z kalendarzem użytkownik może śledzić postępy i zdobywać punkty za wykonywanie codziennych zadań. Oferuje ona również szczegółowe statystyki, aby użytkownicy mogli śledzić swój postęp na bieżąco.
+DailyDo to mobilna aplikacja, która pomaga w tworzeniu, monitorowaniu i utrzymywaniu nawyków. Dzięki integracji z kalendarzem użytkownik może ystawoac  zadania uwzgledniajac inne plany.  Za pomocą punktowego systemu gratyfikacji użytkownik zdobywa większą motywację do tworzenia nawykow. Oferuje ona również szczegółowe statystyki, aby użytkownicy mogli śledzić swój postęp na bieżąco.
+
+Link do wstępnego opisu technicznego: https://www.figma.com/file/fWNwTVOgKCPMvChldsmi5D/DailyDo---projekt-aplikacji?type=design&node-id=1-3215&mode=design&t=hplN4TMCOsAd1hWF-0
