@@ -1,4 +1,4 @@
-DailyDo - Aplikacja do wtowrzenia nawyków
+DailyDo - Aplikacja do tworzenia nawyków
 
 Link do figma: https://www.figma.com/file/fWNwTVOgKCPMvChldsmi5D/DailyDo---projekt-aplikacji?type=design&node-id=0-1&mode=design&t=rUJ7pcK89oHx74Q8-0
 
