@@ -18,7 +18,7 @@ Użyte technologie: Vue, JavaScript, HTML, CSS
    - Przejście do logowania
    - Przejście do rejestracji
   
-2. Ekran aktywności
+3. Ekran aktywności
    Ekran umożliwia tworzenie i edytowanie aktywności.
 
    Funkcjonalności:
@@ -31,7 +31,7 @@ Użyte technologie: Vue, JavaScript, HTML, CSS
    - Usunięcie aktywności
    - Przejście do stron z górnej zakładki: Kalendarz, Statystyki, Profil
   
-3. Ekran nowej aktywności
+4. Ekran nowej aktywności
    Ekran umożliwia dodanie nowej aktywności z odpowiednimi danymi.
 
    Funkcjonalności:
@@ -41,7 +41,7 @@ Użyte technologie: Vue, JavaScript, HTML, CSS
    - Zapisanie nowej aktywności
    - Przejście do stron z górnej zakładki: Kalendarz, Statystyki, Profil
 
-4. Ekran Kalendarza
+5. Ekran Kalendarza
    Ekran umożliwia wyświetlenie kalendarza z aktywnościami i synchronizację z kalendarzem Google.
 
    Funkcjonalności:
@@ -53,7 +53,7 @@ Użyte technologie: Vue, JavaScript, HTML, CSS
    - Rozwinięcie/zwinięcie pola z aktywnością
    - Przejście do stron z górnej zakładki: Aktywności, Statystyki, Profil
 
-5. Ekran Statystyk
+6. Ekran Statystyk
    Ekran umożliwia wyświetlenie statystyk wykonanych aktywności.
 
    Funkcjonalności:
@@ -66,7 +66,7 @@ Użyte technologie: Vue, JavaScript, HTML, CSS
    - Wybranie opcji miesięcy lub tygodni do wyświetlenia na wykresie
    - Przejście do stron z górnej zakładki: Aktywności, Kalendarz, Profil
   
-6. Ekran profilu
+7. Ekran profilu
    Ekran umożliwia ustawienie trybu wakacyjnego, przejście do stron powiązanych z profilem użytkownika oraz wylogowanie się.
 
    Funkcjonalności:
