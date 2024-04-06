@@ -5,6 +5,7 @@ Link do projektu interfejsu aplikacji: https://www.figma.com/file/fWNwTVOgKCPMvC
 DailyDo to aplikacja, która pomaga w tworzeniu i monitorowaniu aktywności, dzięki którym utrzymuje się work-life balance. Integracja z kalendarzem pozwala użytkownikom na ustawianie aktywności przy uwzględnieniu innych spotkań i zadań w pracy, a szczegółowe statystyki ułatwiają monitorowanie postępów. 
 
 
+
 Szczegółowy opis techniczny aplikacji
 
 Użyte technologie: Vue, JavaScript, HTML, CSS
@@ -65,15 +66,13 @@ Użyte technologie: Vue, JavaScript, HTML, CSS
    - Wybranie opcji miesięcy lub tygodni do wyświetlenia na wykresie
    - Przejście do stron z górnej zakładki: Aktywności, Kalendarz, Profil
   
-  6. Ekran profilu
-     Ekran umożliwia ustawienie trybu wakacyjnego, przejście do stron powiązanych z profilem użytkownika oraz wylogowanie się.
+6. Ekran profilu
+   Ekran umożliwia ustawienie trybu wakacyjnego, przejście do stron powiązanych z profilem użytkownika oraz wylogowanie się.
 
-     Funkcjonalności:
-     - Wyświetlenie Statusu oraz informacji o trybie wakacyjnym
-     - Wybranie pierwszego i ostatniego dnia okresu trybu wakacyjnego
-     - Przejście do strony Usunięte Aktywności
-     - Przejście do strony Ustawienia
-     - Przejście do strony Dane Logowania
-     - Wylogowanie się 
-     
-   - 
+   Funkcjonalności:
+   - Wyświetlenie Statusu oraz informacji o trybie wakacyjnym
+   - Wybranie pierwszego i ostatniego dnia okresu trybu wakacyjnego
+   - Przejście do strony Usunięte Aktywności
+   - Przejście do strony Ustawienia
+   - Przejście do strony Dane Logowania
+   - Wylogowanie się 
