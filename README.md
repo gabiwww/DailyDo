@@ -10,16 +10,14 @@ Szczegółowy opis techniczny aplikacji:
 
 Użyte technologie: Vue, JavaScript, HTML, CSS
 
-1. Ekran logowania/rejestracji
-   Ekran umożliwia przejście do strony logowania/rejestracji użytkownika.
+1. Ekran logowania/rejestracji - Ekran umożliwia przejście do strony logowania/rejestracji użytkownika.
 
    Funkcjonalności:
    - Wyświetlenie powitalnej informacji
    - Przejście do logowania
    - Przejście do rejestracji
   
-3. Ekran aktywności
-   Ekran umożliwia tworzenie i edytowanie aktywności.
+3. Ekran aktywności - umożliwia tworzenie i edytowanie aktywności.
 
    Funkcjonalności:
    - Wyświetlenie listy aktywności
@@ -31,8 +29,7 @@ Użyte technologie: Vue, JavaScript, HTML, CSS
    - Usunięcie aktywności
    - Przejście do stron z górnej zakładki: Kalendarz, Statystyki, Profil
   
-4. Ekran nowej aktywności
-   Ekran umożliwia dodanie nowej aktywności z odpowiednimi danymi.
+4. Ekran nowej aktywności - umożliwia dodanie nowej aktywności z odpowiednimi danymi.
 
    Funkcjonalności:
    - Wpisywanie nazwy aktywności
@@ -41,8 +38,7 @@ Użyte technologie: Vue, JavaScript, HTML, CSS
    - Zapisanie nowej aktywności
    - Przejście do stron z górnej zakładki: Kalendarz, Statystyki, Profil
 
-5. Ekran Kalendarza
-   Ekran umożliwia wyświetlenie kalendarza z aktywnościami i synchronizację z kalendarzem Google.
+5. Ekran Kalendarza - umożliwia wyświetlenie kalendarza z aktywnościami i synchronizację z kalendarzem Google.
 
    Funkcjonalności:
    - Wyświetlanie aktywności DailyDo i innych planów z kalendarza na dzisiaj
@@ -53,8 +49,7 @@ Użyte technologie: Vue, JavaScript, HTML, CSS
    - Rozwinięcie/zwinięcie pola z aktywnością
    - Przejście do stron z górnej zakładki: Aktywności, Statystyki, Profil
 
-6. Ekran Statystyk
-   Ekran umożliwia wyświetlenie statystyk wykonanych aktywności.
+6. Ekran Statystyk - umożliwia wyświetlenie statystyk wykonanych aktywności.
 
    Funkcjonalności:
    - Wyświetlenie nazw aktywności
@@ -66,8 +61,7 @@ Użyte technologie: Vue, JavaScript, HTML, CSS
    - Wybranie opcji miesięcy lub tygodni do wyświetlenia na wykresie
    - Przejście do stron z górnej zakładki: Aktywności, Kalendarz, Profil
   
-7. Ekran profilu
-   Ekran umożliwia ustawienie trybu wakacyjnego, przejście do stron powiązanych z profilem użytkownika oraz wylogowanie się.
+7. Ekran profilu - umożliwia ustawienie trybu wakacyjnego, przejście do stron powiązanych z profilem użytkownika oraz wylogowanie się.
 
    Funkcjonalności:
    - Wyświetlenie Statusu oraz informacji o trybie wakacyjnym
