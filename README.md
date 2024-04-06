@@ -10,7 +10,7 @@ Szczegółowy opis techniczny aplikacji:
 
 Użyte technologie: Vue, JavaScript, HTML, CSS
 
-1. Ekran logowania/rejestracji - Ekran umożliwia przejście do strony logowania/rejestracji użytkownika.
+1. Ekran logowania/rejestracji - umożliwia przejście do strony logowania/rejestracji użytkownika.
 
    Funkcjonalności:
    - Wyświetlenie powitalnej informacji
