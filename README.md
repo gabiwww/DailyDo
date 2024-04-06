@@ -6,7 +6,7 @@ DailyDo to aplikacja, która pomaga w tworzeniu i monitorowaniu aktywności, dzi
 
 
 
-Szczegółowy opis techniczny aplikacji
+Szczegółowy opis techniczny aplikacji:
 
 Użyte technologie: Vue, JavaScript, HTML, CSS
 
