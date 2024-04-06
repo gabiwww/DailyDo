@@ -54,19 +54,16 @@ Użyte technologie: Vue, JavaScript, HTML, CSS
    Funkcjonalności:
    - Wyświetlenie nazw aktywności
    - Zmiana widoczności aktywności w statystykach
-   - Przycisk uwzględniający wszystkie aktywności w statystykach
-   - Rozwinięce/zwinięcie pola z antywnościami
+   - Rozwinięce/zwinięcie pola z aktywnościami
    - Wyświetlenie dni aktualnej/najdłuższej passy
    - Wyświetlenie wykrestu statystycznego z danymi o % wykonanych aktywności w danych miesiącach/tygodniach
    - Wybranie opcji miesięcy lub tygodni do wyświetlenia na wykresie
    - Przejście do stron z górnej zakładki: Aktywności, Kalendarz, Profil
   
-7. Ekran profilu - umożliwia ustawienie trybu wakacyjnego, przejście do stron powiązanych z profilem użytkownika oraz wylogowanie się.
+7. Ekran profilu - umożliwia ustawienie trybu wakacyjnego, podgląd i edycję danych logowania oraz wylogowanie się.
 
    Funkcjonalności:
    - Wyświetlenie Statusu oraz informacji o trybie wakacyjnym
    - Wybranie pierwszego i ostatniego dnia okresu trybu wakacyjnego
-   - Przejście do strony Usunięte Aktywności
-   - Przejście do strony Ustawienia
-   - Przejście do strony Dane Logowania
+   - Wyświetlenie i możliwość edycji danych logowania
    - Wylogowanie się 
