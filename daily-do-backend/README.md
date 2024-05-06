@@ -10,9 +10,9 @@ Visual Studio Code installed
 1. Open Visual Studio Code and open folder with project.
 2. Copy the .env.example file, change “localhost:5432” to localhost:port-where-postgres-listens (port that shows up when you open postgres) and name the copied file .env
 3. Create a database named daily-do:
-   3.1. Open pgAdmin and click "Add New Server" and type a name, e.g. daily-do
-   3.2. Click "Connection" and fill connection form (host name is localhost, port from .env file, leave the other fields as they are), Save
-   3.3. Right click Databases and create a new database named daily-do
+      1. Open pgAdmin and click "Add New Server" and type a name, e.g. daily-do 
+      2. Click "Connection" and fill connection form (host name is localhost, port from .env file, leave the other fields as they are), Save 
+      3. Right click Databases and create a new database named daily-do 
 5. Open terminal in Visual Studio Code and install npm by typing: ` npm install `
 6. Once the installation is complete, start the project by typing: ` npm run start `
 
