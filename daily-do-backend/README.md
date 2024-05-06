@@ -1,9 +1,9 @@
-***Requirements:***
-node.js installed [install node.js now](https://nodejs.org/en/download)
+***Requirements:*** \
+node.js installed [install node.js now](https://nodejs.org/en/download) \
 postgres installed [install postgres now](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
 
-***Nice to have:***
-pgAdmin installed (or other postgres client) [install pgAdmin now](https://www.pgadmin.org/download/)
+***Nice to have:*** \
+pgAdmin installed [install pgAdmin now](https://www.pgadmin.org/download/) \
 Visual Studio Code installed
 
 ## Easy manual to get started:
