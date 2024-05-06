@@ -16,6 +16,32 @@ Visual Studio Code installed
 5. Open terminal in Visual Studio Code and install npm by typing: ` npm install `
 6. Once the installation is complete, start the project by typing: ` npm run start `
 
+## API Documentation
+To ***sign up*** the user you have to request:
+POST localhost:PORT/auth/register with JSON body:
+(PORT from .env for this example is 3000)
+```JSON
+{
+"username": "example-username",
+"password": "example-password"
+}
+```
+
+To ***sign in*** the user you have to request:
+POST localhost:PORT/auth/login with JSON body:
+(PORT from .env for this example is 3000)
+```JSON
+{
+"username": "example-username",
+"password": "example-password"
+}
+```
+In 200 OK (correct) responce you will get 
+```JSON
+{
+"access_token": "example-jwt-token"
+}
+```
 
 ## Description
 
