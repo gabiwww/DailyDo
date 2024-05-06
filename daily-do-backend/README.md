@@ -17,9 +17,10 @@ Visual Studio Code installed
 6. Once the installation is complete, start the project by typing: ` npm run start `
 
 ## API Documentation
-To ***sign up*** the user you have to request:
-POST localhost:PORT/auth/register with JSON body:
-(PORT from .env for this example is 3000)
+To ***sign up*** the user you have to request: 
+#### POST localhost:PORT/auth/register
+(PORT from .env for this example is 3000) \
+with JSON body:
 ```JSON
 {
 "username": "example-username",
@@ -28,8 +29,9 @@ POST localhost:PORT/auth/register with JSON body:
 ```
 
 To ***sign in*** the user you have to request:
-POST localhost:PORT/auth/login with JSON body:
-(PORT from .env for this example is 3000)
+#### POST localhost:PORT/auth/login
+(PORT from .env for this example is 3000) \
+with JSON body:
 ```JSON
 {
 "username": "example-username",
