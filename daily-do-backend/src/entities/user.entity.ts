@@ -1,10 +1,12 @@
 import {
   Column,
   Entity,
+  JoinTable,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { BaseEntity } from './base.entity';
-
+import { HabitEntity } from './habit.entity';
 
 @Entity('users')
 export class UserEntity extends BaseEntity {
@@ -16,5 +18,7 @@ export class UserEntity extends BaseEntity {
 
   @Column('varchar', { length: 300 })
   password: string;
-}
 
+  @OneToMany(() => HabitEntity, (habit) => habit.owner, { cascade: true })
+  habits: Array<HabitEntity>;
+}

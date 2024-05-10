@@ -6,10 +6,13 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { config } from 'dotenv';
+import { HabitsModule } from './habits/habits.module';
 
 config();
 @Module({
-  imports: [AuthModule, UsersModule, 
+  imports: [
+    AuthModule,
+    UsersModule,
     ConfigModule.forRoot(),
     TypeOrmModule.forRootAsync({
       useFactory: async () => ({
@@ -20,7 +23,9 @@ config();
         synchronize: true,
         autoLoadEntities: true,
       }),
-    }),],
+    }),
+    HabitsModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
