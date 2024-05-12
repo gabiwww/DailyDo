@@ -1,0 +1,216 @@
+<template>
+  <div class="home">
+    <MainHeader />
+    <MainMobileHeader />
+    <div class="home-content">
+      <div class="home-text">
+        <h1>Aktywności</h1>
+      </div>
+      <div
+        v-for="(activity, index) in activities"
+        :key="index"
+        class="home-box"
+        @click="toggleActive(index)"
+      >
+        <div :class="{ 'box-top': true, active: isActive[index] }">
+          <h2>{{ activity.title }}</h2>
+          <img
+            :class="{ active: isActive[index] }"
+            src="@assets/arrow-down.svg"
+            alt=""
+          />
+        </div>
+        <div class="box-mid">
+          <p>{{ activity.schedule }}</p>
+        </div>
+        <div class="box-bottom" :class="{ active: isActive[index] }">
+          <input type="checkbox" />
+          <p>{{ activity.today }}</p>
+        </div>
+      </div>
+      <div class="home-bottom">
+        <button class="home-bottom-btn">Zarządzaj aktywnościami</button>
+      </div>
+      <div class="home-list">
+        <img src="@assets/arrow-left.svg" alt="" />
+        <p>wróć do listy aktywności</p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import MainHeader from "@main-components/main-header.vue";
+import MainMobileHeader from "@main-components/main-mobile-header.vue";
+
+export default {
+  components: {
+    MainHeader,
+    MainMobileHeader,
+  },
+  data() {
+    return {
+      isActive: [],
+      activities: [
+        {
+          title: "Przerwa na kawę",
+          schedule: "Codziennie | 10:00",
+          today: "dzisiaj o 10:00",
+        },
+        {
+          title: "Krótki spacer",
+          schedule: "Codziennie | 12:00",
+          today: "dzisiaj o 12:00",
+        },
+      ],
+    };
+  },
+  methods: {
+    toggleActive(index) {
+      this.isActive[index] = !this.isActive[index];
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.home {
+  width: 100%;
+  height: 1024px;
+  align-items: center;
+  flex-direction: column;
+  background: url("@assets/bg2.png");
+  position: relative;
+  .home-content {
+    .home-text {
+      padding-top: 2rem;
+      margin-bottom: 2rem;
+      h1 {
+        text-align: center;
+        color: var(--blue);
+        font-size: 32px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+    }
+    .home-box:not(:last-child) {
+      margin-bottom: 2rem;
+    }
+    .home-box {
+      margin-left: auto;
+      margin-right: auto;
+      width: 643px;
+      padding: 1rem;
+      background-color: var(--white-opacity);
+      border-radius: 15px;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      .box-top {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        h2 {
+          font-size: 22px;
+          font-weight: 700;
+          text-transform: uppercase;
+          color: var(--blue);
+        }
+        img {
+          transition: 0.5s;
+          &.active {
+            transform: rotate(180deg);
+          }
+        }
+      }
+      .box-mid {
+        color: var(--light-blue);
+        margin-bottom: 1rem;
+      }
+      .box-bottom {
+        display: none;
+        input {
+          width: 20px;
+          height: 20px;
+          margin-right: 1rem;
+          cursor: pointer;
+        }
+        p {
+          font-size: 18px;
+          color: var(--blue);
+          font-weight: 700;
+        }
+        &.active {
+          display: flex;
+        }
+      }
+    }
+    .home-bottom {
+      position: fixed;
+      bottom: 1rem;
+      left: 42%;
+      .home-bottom-btn {
+        width: 240px;
+        height: 41px;
+        font-size: 16px;
+        font-weight: 700;
+        border-radius: 25px;
+        background-color: var(--blue);
+        border: 1px solid var(--blue);
+        color: var(--white);
+        margin-bottom: 1rem;
+        box-shadow: var(--shadow);
+        cursor: pointer;
+      }
+    }
+    .home-list {
+      position: absolute;
+      left: auto;
+      top: 150px;
+      display: flex;
+      margin-left: 3rem;
+      img {
+        margin-right: 1rem;
+      }
+      p {
+        font-size: 12px;
+        color: var(--blue);
+      }
+    }
+  }
+  .mobile-header {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .home {
+    .header {
+      display: none;
+    }
+    .mobile-header {
+      display: flex;
+    }
+    .home-content {
+      .home-text {
+        h1 {
+          width: 95%;
+          margin-left: auto;
+          margin-right: auto;
+          font-size: 24px;
+          text-align: left;
+        }
+      }
+      .home-box {
+        width: 95%;
+      }
+      .home-list {
+        display: none;
+      }
+      .home-bottom {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  }
+}
+</style>
