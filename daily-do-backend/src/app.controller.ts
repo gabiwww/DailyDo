@@ -8,7 +8,7 @@ import {
   Post,
   Request,
   UseGuards,
-  Put
+  Put,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -26,6 +26,7 @@ import {
   ApiNotFoundExceptionResponse,
   ApiUnauthorizedExceptionResponse,
 } from './decorators/exceptions.decorator';
+import { ActivityUpdateDto } from './dto/activity/activity-update.dto';
 import { JwtTokenDto } from './dto/auth/jwt-token.dto';
 import { BooleanResponseDto } from './dto/common/boolean-response.dto';
 import { HabitResponseDto } from './dto/habit/habit-response.dto';
@@ -36,6 +37,8 @@ import { UserCredentialsDto } from './dto/user/user-credentials.dto';
 import { UserProfileDto } from './dto/user/user-profile.dto';
 import { HabitEntity } from './entities/habit.entity';
 import { HabitsService } from './habits/habits.service';
+import { ActivitiesService } from './activities/activities.service';
+
 import { RequestWithUser } from './interface/auth.interface';
 
 @ApiTags('app')
@@ -44,6 +47,7 @@ export class AppController {
   constructor(
     private readonly authService: AuthService,
     private readonly habitsService: HabitsService,
+    private readonly activitiesService: ActivitiesService,
   ) {}
 
   @Post('auth/register')
@@ -171,7 +175,32 @@ export class AppController {
     @Body() habitUpdateDto: HabitUpdateDto,
     @Request() req: RequestWithUser,
   ): Promise<BooleanResponseDto> {
-    return { success: await this.habitsService.update(habitUpdateDto, req.user) };
+    return {
+      success: await this.habitsService.update(habitUpdateDto, req.user),
+    };
   }
 
+  @Put('activities')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiBody({
+    description: 'Check Activity',
+    type: ActivityUpdateDto,
+  })
+  @ApiCreatedResponse({
+    description: 'Check Activity',
+    type: BooleanResponseDto,
+  })
+  @ApiBadRequestExceptionResponse()
+  async checkActivity(
+    @Body() activityUpdateDto: ActivityUpdateDto,
+    @Request() req: RequestWithUser,
+  ): Promise<BooleanResponseDto> {
+    return {
+      success: await this.activitiesService.checkActivity(
+        activityUpdateDto,
+        req.user,
+      ),
+    };
+  }
 }

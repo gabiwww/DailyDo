@@ -7,12 +7,17 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { config } from 'dotenv';
 import { HabitsModule } from './habits/habits.module';
+import { ActivitiesModule } from './activities/activities.module';
+import { ScheduleModule } from '@nestjs/schedule';
+
 
 config();
 @Module({
   imports: [
+    ScheduleModule.forRoot(),
     AuthModule,
     UsersModule,
+    ActivitiesModule,
     ConfigModule.forRoot(),
     TypeOrmModule.forRootAsync({
       useFactory: async () => ({
