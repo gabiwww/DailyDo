@@ -19,6 +19,6 @@ export class UserEntity extends BaseEntity {
   @Column('varchar', { length: 300 })
   password: string;
 
-  @OneToMany(() => HabitEntity, (habit) => habit.owner, { cascade: true })
+  @OneToMany(() => HabitEntity, (habit) => habit.owner)
   habits: Array<HabitEntity>;
 }

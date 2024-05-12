@@ -15,6 +15,11 @@ export class HabitDto implements Readonly<HabitDto> {
   name: string;
 
   @ApiProperty()
+  @IsString()
+  @Length(0, 1000)
+  note: string;
+
+  @ApiProperty()
   @IsArray()
   @IsString({ each: true })
   @ArrayMinSize(1)
@@ -28,7 +33,8 @@ export class HabitDto implements Readonly<HabitDto> {
   public toEntity(owner: UserEntity) {
     const it = new HabitEntity();
     it.name = this.name;
-    it.days = this.days;
+    it.note = this.note;
+    it.days = this.days.map((day)=>day.toUpperCase());
     it.hour = this.hour;
     it.owner = owner;
     it.createDateTime = new Date();
