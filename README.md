@@ -8,7 +8,7 @@ DailyDo to aplikacja, która pomaga w tworzeniu i monitorowaniu aktywności, dzi
 
 Szczegółowy opis techniczny aplikacji:
 
-Użyte technologie: Vue, JavaScript, HTML, CSS
+Użyte technologie: Vue, JavaScript, TypeScript, NodeJS, Postgress, HTML, CSS
 
 1. Ekran logowania/rejestracji - umożliwia przejście do strony logowania/rejestracji użytkownika.
 
@@ -67,4 +67,3 @@ Użyte technologie: Vue, JavaScript, HTML, CSS
    - Wybranie pierwszego i ostatniego dnia okresu trybu wakacyjnego
    - Wyświetlenie i możliwość edycji danych logowania
    - Wylogowanie się 
->>>>>>> cb0661858d7239821685e4e562ee3aee2a3bf3c5
