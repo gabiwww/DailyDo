@@ -39,7 +39,7 @@ export class HabitUpdateDto implements Readonly<HabitUpdateDto> {
     const it = new HabitEntity();
     it.name = this.name;
     it.note = this.note;
-    it.days = this.days.map((day)=>day.toUpperCase());
+    it.days = this.days.map((day) => day.toUpperCase());
     it.hour = this.hour;
     it.owner = owner;
     it.createDateTime = new Date();
