@@ -40,6 +40,7 @@ import { HabitsService } from './habits/habits.service';
 import { ActivitiesService } from './activities/activities.service';
 
 import { RequestWithUser } from './interface/auth.interface';
+import { StatisticResponseDto } from './dto/habit/statistic-response.dto';
 
 @ApiTags('app')
 @Controller()
@@ -120,6 +121,24 @@ export class AppController {
     if (!+id) throw new BadRequestException('Invalid id param');
 
     return await this.habitsService.findOneById(+id, req.user);
+  }
+
+  @Get('statistics/:habitId')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOkResponse({
+     description: 'Statistics',
+     type: StatisticResponseDto,
+   })
+  @ApiNotFoundExceptionResponse()
+  @ApiUnauthorizedExceptionResponse()
+  @ApiBadRequestExceptionResponse()
+  async getStatisticsByHabitId(
+    @Param('habitId') habitId: number,
+    @Request() req: RequestWithUser,
+  ): Promise<any> {
+    if (!+habitId) throw new BadRequestException('Invalid id param');
+    return await this.habitsService.statisticsById(+habitId, req.user);
   }
 
   @Delete('habit/:id')

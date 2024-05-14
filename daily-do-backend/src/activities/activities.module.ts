@@ -5,9 +5,7 @@ import { ActivitiesService } from './activities.service';
 import { ActivityEntity } from 'src/entities/activity.entity';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([ActivityEntity, HabitEntity]),
-  ],
+  imports: [TypeOrmModule.forFeature([ActivityEntity, HabitEntity])],
   providers: [ActivitiesService],
   exports: [ActivitiesService],
 })

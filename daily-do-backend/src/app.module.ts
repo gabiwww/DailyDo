@@ -10,7 +10,6 @@ import { HabitsModule } from './habits/habits.module';
 import { ActivitiesModule } from './activities/activities.module';
 import { ScheduleModule } from '@nestjs/schedule';
 
-
 config();
 @Module({
   imports: [

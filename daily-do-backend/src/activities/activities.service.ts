@@ -22,23 +22,35 @@ export class ActivitiesService {
 
     return activity;
   }
-  async checkActivity(activityUpdateDto: ActivityUpdateDto, user: UserPayload): Promise<boolean> {
+
+  async findByHabitId(habitId: number) {
+    const activities = await this.activitiesRepository.find({
+      where: {
+        habit: { id: habitId },
+      },
+    });
+    return activities;
+  }
+
+  async checkActivity(
+    activityUpdateDto: ActivityUpdateDto,
+    user: UserPayload,
+  ): Promise<boolean> {
     const { id, isChecked } = activityUpdateDto;
 
-    const activityToUpdate = await this.activitiesRepository.findOneBy({id:id});
+    const activityToUpdate = await this.activitiesRepository.findOneBy({
+      id: id,
+    });
     if (!activityToUpdate) throw new NotFoundException();
-    
+
     activityToUpdate.isChecked = isChecked;
 
-    await this.activitiesRepository.save(activityToUpdate)
+    await this.activitiesRepository.save(activityToUpdate);
 
     return true;
   }
 
   async createInDb(activityEntity: ActivityEntity) {
-
-    return await this.activitiesRepository.save(activityEntity)
-
+    return await this.activitiesRepository.save(activityEntity);
   }
-  
 }
