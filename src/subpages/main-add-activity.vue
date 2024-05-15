@@ -11,13 +11,13 @@
           <h2>Nazwa*</h2>
         </div>
         <div class="box-input">
-          <input type="text" placeholder="wpisz nazwę aktywności" />
+          <input v-model="title" type="text" placeholder="wpisz nazwę aktywności" />
         </div>
         <div class="box-text">
           <h2>Notatka</h2>
         </div>
         <div class="box-input">
-          <input type="text" placeholder="wpisz dodatkowe informacje" />
+          <input v-model="note" type="text" placeholder="wpisz dodatkowe informacje" />
         </div>
       </div>
       <div class="home-box">
@@ -32,27 +32,27 @@
             <div class="box-cal">
               <div class="box-cal-item">
                 <h3>Codziennie</h3>
-                <input type="checkbox" />
+                <input type="checkbox" v-model="activity.days.everyday" />
               </div>
               <div class="box-cal-item">
                 <h3>Poniedziałki</h3>
-                <input type="checkbox" />
+                <input type="checkbox" v-model="activity.days.monday" />
               </div>
               <div class="box-cal-item">
                 <h3>Wtorki</h3>
-                <input type="checkbox" />
+                <input type="checkbox" v-model="activity.days.tuesday" />
               </div>
               <div class="box-cal-item">
                 <h3>Środy</h3>
-                <input type="checkbox" />
+                <input type="checkbox" v-model="activity.days.wednesday" />
               </div>
               <div class="box-cal-item">
                 <h3>Czwartki</h3>
-                <input type="checkbox" />
+                <input type="checkbox" v-model="activity.days.thursday" />
               </div>
               <div class="box-cal-item">
                 <h3>Piątki</h3>
-                <input type="checkbox" />
+                <input type="checkbox" v-model="activity.days.friday" />
               </div>
             </div>
           </div>
@@ -62,7 +62,7 @@
             </div>
             <div class="box-select">
               <span class="select-styled">
-                <select>
+                <select v-model="time">
                   <option value="8:00">8:00</option>
                   <option value="9:00">9:00</option>
                   <option value="10:00">10:00</option>
@@ -73,9 +73,9 @@
         </div>
       </div>
       <div class="home-bottom">
-        <button class="home-bottom-btn">Zapisz</button>
+        <button class="home-bottom-btn" @click="saveActivity">Zapisz</button>
       </div>
-      <div class="home-list">
+      <div class="home-list" style="cursor: pointer;" @click="backToActivities">
         <img src="@assets/arrow-left.svg" alt="" />
         <p>wróć do listy aktywności</p>
       </div>
@@ -92,6 +92,59 @@ export default {
     MainHeader,
     MainMobileHeader,
   },
+  data() {
+    return {
+      activity: {
+        title: '',
+        note: '',
+        days: {
+          everyday: false,
+          monday: false,
+          tuesday: false,
+          wednesday: false,
+          thursday: false,
+          friday: false,
+          saturday: false,
+          sunday: false
+        },
+        time: ''
+      }
+    };
+  },
+  methods: {
+    async saveActivity() {
+      try {
+        const response = await fetch('http://localhost:3001/activities', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(this.activity)
+        });
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+        console.log(data);
+        this.$router.push('/main-activity');
+      } catch (error) {
+        console.error('There has been a problem with your fetch operation:', error);
+      }
+    },
+    setAllDays(value) {
+      for (let day in this.activity.days) {
+        this.activity.days[day] = value;
+      }
+    },
+    backToActivities() {
+      this.$router.push('/main-activity');
+    }
+  },
+  watch: {
+    'activity.days.everyday': function(newValue) {
+      if (newValue) {
+        this.setAllDays(true);
+      }
+    }
+  }
 };
 </script>
 

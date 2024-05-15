@@ -31,10 +31,6 @@
       <div class="home-bottom">
         <button class="home-bottom-btn" @click="manageActivities">Zarządzaj aktywnościami</button>
       </div>
-      <div class="home-list">
-        <img src="@assets/arrow-left.svg" alt="" />
-        <p>wróć do listy aktywności</p>
-      </div>
     </div>
   </div>
 </template>

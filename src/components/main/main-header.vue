@@ -7,7 +7,6 @@
       <div class="nav-right">
         <div class="nav-right-links">
           <router-link to="/main-activity">Aktywności</router-link>
-          <router-link to="/main-calendar">Kalendarz</router-link>
           <router-link to="/main-analitics">Statystyki</router-link>
         </div>
         <router-link to="/main-profile" class="nav-right-icon">

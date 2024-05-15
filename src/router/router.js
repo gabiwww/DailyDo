@@ -9,6 +9,7 @@ import MainAnalitics from "@subpages/main-analitics.vue";
 import MainProfile from "@subpages/main-profile.vue";
 import MainRegister from "@subpages/main-register.vue";
 import MainLogin from "@subpages/main-login.vue";
+import MainProfileLoginDetails from "@subpages/main-profile-login-details.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -89,6 +90,15 @@ const router = createRouter({
       path: "/main-register",
       component: MainRegister,
       name: "main-register",
+      meta: {
+        title: "",
+        description: "",
+      },
+    },
+    {
+      path: "/main-profile-login-details",
+      component: MainProfileLoginDetails,
+      name: "main-profile-login-details",
       meta: {
         title: "",
         description: "",

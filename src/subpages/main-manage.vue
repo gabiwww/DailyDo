@@ -35,9 +35,9 @@
         </div>
       </div>
       <div class="home-bottom">
-        <button class="home-bottom-btn">Dodaj aktywność</button>
+        <button class="home-bottom-btn" @click="addActivity">Dodaj aktywność</button>
       </div>
-      <div class="home-list">
+      <div class="home-list" style="cursor: pointer;" @click="backToActivities">
         <img src="@assets/arrow-left.svg" alt="" />
         <p>wróć do listy aktywności</p>
       </div>
@@ -73,6 +73,12 @@ export default {
     toggleActive(index) {
       this.isActive[index] = !this.isActive[index];
     },
+    addActivity() {
+      this.$router.push("/main-add-activity");
+    },
+    backToActivities() {
+      this.$router.push('/main-activity');
+    }
   },
 };
 </script>

@@ -6,58 +6,8 @@
       <div class="home-text">
         <h1>Profil</h1>
       </div>
-      <div class="home-box" @click="toggleActivities">
-        <div class="box-top">
-          <h2>Tryb wakacyjny</h2>
-          <img
-            src="@assets/arrow-up.svg"
-            alt=""
-            :class="{ active: isActivitiesOpen }"
-          />
-        </div>
-        <div class="box-mid">
-          <p>Nieaktywny</p>
-        </div>
-        <div class="box-bottom" :class="{ active: isActivitiesOpen }">
-          <div class="box-bottom-columns">
-            <div class="box-bottom-left">
-              <p>Od:</p>
-              <div class="box-select">
-                <span class="select-styled">
-                  <select>
-                    <option value="25.09.2024">25.09.2024</option>
-                    <option value="25.10.2024">25.10.2024</option>
-                    <option value="25.11.2024">25.11.2024</option>
-                  </select>
-                </span>
-              </div>
-            </div>
-            <div class="box-bottom-right">
-              <p>Do:</p>
-              <div class="box-select">
-                <span class="select-styled">
-                  <select>
-                    <option value="25.09.2024">25.09.2024</option>
-                    <option value="25.10.2024">25.10.2024</option>
-                    <option value="25.11.2024">25.11.2024</option>
-                  </select>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="box-bottom-info">
-            <p>
-              W trybie wakacyjnym niewykonane aktywności nie będą uwzględnione w
-              statystykach
-            </p>
-          </div>
-          <div class="box-bottom-button">
-            <button class="box-bottom-btn">Zapisz</button>
-          </div>
-        </div>
-      </div>
       <div class="home-box">
-        <div class="box-top">
+        <div class="box-top" @click="goToLoginData">
           <h2>Dane logowania</h2>
           <img src="@assets/arrow-right.svg" alt="" />
         </div>
@@ -85,11 +35,11 @@ export default {
     };
   },
   methods: {
-    toggleActivities() {
-      this.isActivitiesOpen = !this.isActivitiesOpen;
-    },
     logout() {
       this.$router.push("/");
+    },
+    goToLoginData() {
+      this.$router.push("/main-profile-login-details");
     },
   },
 };

@@ -1,7 +1,5 @@
 <template>
   <div class="home">
-    <MainHeader />
-    <MainMobileHeader />
     <div class="home-content">
       <div class="home-text">
         <h1>Rejestracja</h1>
@@ -21,6 +19,9 @@
           <div class="box-button">
             <button :style="{ color: isDisabled ? 'gray' : 'white' }" class="box-btn" type="submit" :disabled="isDisabled">Zarejestruj się</button>
           </div>
+          <div class="box-button back-button">
+            <button class="box-btn" @click="goBackToMainPage">Wróć do strony głównej</button>
+          </div>
         </form>
       </div>
     </div>
@@ -28,15 +29,9 @@
 </template>
 
 <script>
-import MainHeader from "@main-components/main-header.vue";
-import MainMobileHeader from "@main-components/main-mobile-header.vue";
 import { useRouter } from "vue-router";
 
 export default {
-  components: {
-    MainHeader,
-    MainMobileHeader,
-  },
   data() {
     return {
       username: '',
@@ -93,6 +88,9 @@ export default {
         alert('Registration failed');
       }
     },
+    goBackToMainPage() {
+      this.$router.push('/');
+    }
   }
 };
 </script>
@@ -165,6 +163,9 @@ export default {
           box-shadow: var(--shadow);
           cursor: pointer;
         }
+      }
+      .back-button {
+        margin-top: 1rem;
       }
     }
   }
