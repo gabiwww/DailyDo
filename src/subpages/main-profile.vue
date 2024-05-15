@@ -62,7 +62,7 @@
           <img src="@assets/arrow-right.svg" alt="" />
         </div>
       </div>
-      <div class="home-logout">
+      <div class="home-logout" @click="logout">
         <img src="@assets/logout.svg" alt="" />
         <h2>wyloguj</h2>
       </div>
@@ -88,6 +88,9 @@ export default {
     toggleActivities() {
       this.isActivitiesOpen = !this.isActivitiesOpen;
     },
+    logout() {
+      this.$router.push("/");
+    },
   },
 };
 </script>
@@ -104,6 +107,7 @@ export default {
     margin-left: auto;
     margin-right: auto;
     .home-logout {
+      cursor: pointer;
       width: 640px;
       margin-left: auto;
       margin-right: auto;

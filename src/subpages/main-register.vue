@@ -7,18 +7,21 @@
         <h1>Rejestracja</h1>
       </div>
       <div class="home-box">
-        <div class="box-input">
-          <input type="text" placeholder="Login" />
-        </div>
-        <div class="box-input">
-          <input type="password" placeholder="Hasło" />
-        </div>
-        <div class="box-input">
-          <input type="password" placeholder="Powtórz hasło" />
-        </div>
-        <div class="box-button">
-          <button class="box-btn">Zarejestruj się</button>
-        </div>
+        <form @submit.prevent="register">
+          <div class="box-input">
+            <input type="text" placeholder="Login" v-model="username" />
+          </div>
+          <div class="box-input">
+            <input type="password" placeholder="Hasło" v-model="password" />
+          </div>
+          <div class="box-input confirm-box">
+            <input class="confirm-input" type="password" placeholder="Powtórz hasło" v-model="confirmPassword" />
+            <p class="error-text" v-if="passwordError">{{ passwordError }}</p>
+          </div>
+          <div class="box-button">
+            <button :style="{ color: isDisabled ? 'gray' : 'white' }" class="box-btn" type="submit" :disabled="isDisabled">Zarejestruj się</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -27,16 +30,84 @@
 <script>
 import MainHeader from "@main-components/main-header.vue";
 import MainMobileHeader from "@main-components/main-mobile-header.vue";
+import { useRouter } from "vue-router";
 
 export default {
   components: {
     MainHeader,
     MainMobileHeader,
   },
+  data() {
+    return {
+      username: '',
+      password: '',
+      confirmPassword: '',
+      passwordError: ''
+    };
+  },
+  computed: {
+    isDisabled() {
+      return this.password !== this.confirmPassword;
+    }
+  },
+  watch: {
+    password() {
+      this.checkPasswords();
+    },
+    confirmPassword() {
+      this.checkPasswords();
+    },
+  },
+  methods: {
+    checkPasswords() {
+      this.passwordError = this.isDisabled ? 'Hasła nie są zgodne' : '';
+    },
+    async register() {
+      if (this.isDisabled) {
+        this.passwordError = 'Hasła nie są zgodne';
+        return;
+      } else {
+        this.passwordError = '';
+      }
+
+      const response = await fetch('http://localhost:3001/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: this.username,
+          password: this.password,
+        }),
+      });
+
+      if (response.ok) {
+        this.username = '';
+        this.password = '';
+        this.confirmPassword = '';
+        this.$router.push('/main-login');
+      } else {
+        this.username = '';
+        this.password = '';
+        this.confirmPassword = '';
+        alert('Registration failed');
+      }
+    },
+  }
 };
 </script>
 
 <style lang="scss" scoped>
+.error-text {
+  color: red;
+  text-align: center;
+}
+.confirm-input {
+  margin-bottom: 1rem;
+}
+.confirm-box {
+  padding-bottom: 1rem;
+}
 .home {
   width: 100%;
   height: 1024px;

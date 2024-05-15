@@ -8,13 +8,13 @@
       </div>
       <div class="home-box">
         <div class="box-input">
-          <input type="text" placeholder="Login" />
+          <input type="text" placeholder="Login" v-model="username" />
         </div>
         <div class="box-input">
-          <input type="password" placeholder="Hasło" />
+          <input type="password" placeholder="Hasło" v-model="password" />
         </div>
         <div class="box-button">
-          <button class="box-btn">Zaloguj się</button>
+          <button class="box-btn" @click="login">Zaloguj się</button>
         </div>
       </div>
     </div>
@@ -29,6 +29,36 @@ export default {
   components: {
     MainHeader,
     MainMobileHeader,
+  },
+  data() {
+    return {
+      username: '',
+      password: '',
+    };
+  },
+  methods: {
+    async login() {
+      const response = await fetch('http://localhost:3001/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: this.username,
+          password: this.password,
+        }),
+      });
+
+      if (response.ok) {
+        this.username = '';
+        this.password = '';
+        this.$router.push('/main-activity');
+      } else {
+        this.username = '';
+        this.password = '';
+        alert('Login failed');
+      }
+    },
   },
 };
 </script>

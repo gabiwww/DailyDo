@@ -29,7 +29,7 @@
         </div>
       </div>
       <div class="home-bottom">
-        <button class="home-bottom-btn">Zarządzaj aktywnościami</button>
+        <button class="home-bottom-btn" @click="manageActivities">Zarządzaj aktywnościami</button>
       </div>
       <div class="home-list">
         <img src="@assets/arrow-left.svg" alt="" />
@@ -69,7 +69,10 @@ export default {
     toggleActive(index) {
       this.isActive[index] = !this.isActive[index];
     },
-  },
+    manageActivities() {
+      this.$router.push("/main-manage");
+    },
+  }
 };
 </script>
 

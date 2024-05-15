@@ -6,8 +6,8 @@
       <p>
         Twórz aktywności i utrzymuj balans między pracą a życiem każdego dnia.
       </p>
-      <button class="home-btn">Zaloguj się</button>
-      <button class="home-btn">Zarejestruj się</button>
+      <button class="home-btn" @click="goToLogin">Zaloguj się</button>
+      <button class="home-btn" @click="goToRegister">Zarejestruj się</button>
     </div>
     <div class="home-mobile">
       <MainMobileHeader />
@@ -17,8 +17,8 @@
           Twórz aktywności i utrzymuj balans między pracą a życiem każdego dnia.
         </p>
         <div class="mobile-box-buttons">
-          <button class="mobile-box-btn">Zaloguj się</button>
-          <button class="mobile-box-btn">Zarejestruj się</button>
+          <button class="mobile-box-btn" @click="goToLogin">Zaloguj się</button>
+          <button class="mobile-box-btn" @click="goToRegister">Zarejestruj się</button>
         </div>
       </div>
     </div>
@@ -26,11 +26,28 @@
 </template>
 
 <script>
+import { useRouter } from "vue-router";
 import MainMobileHeader from "@main-components/main-mobile-header.vue";
 export default {
   components: {
     MainMobileHeader,
   },
+  setup() {
+    const router = useRouter();
+
+    const goToRegister = () => {
+      router.push('/main-register');
+    };
+
+    const goToLogin = () => {
+      router.push('/main-login');
+    };
+
+    return {
+      goToRegister,
+      goToLogin
+    };
+  }
 };
 </script>
 

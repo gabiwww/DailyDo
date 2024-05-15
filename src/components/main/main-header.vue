@@ -2,17 +2,17 @@
   <div class="header">
     <div class="nav">
       <div class="nav-logo">
-        <router-link to="'/'">DailyDo</router-link>
+        <router-link to="/">DailyDo</router-link>
       </div>
       <div class="nav-right">
         <div class="nav-right-links">
-          <router-link>Aktywności</router-link>
-          <router-link>Kalendarz</router-link>
-          <router-link>Statystyki</router-link>
+          <router-link to="/main-activity">Aktywności</router-link>
+          <router-link to="/main-calendar">Kalendarz</router-link>
+          <router-link to="/main-analitics">Statystyki</router-link>
         </div>
-        <div class="nav-right-icon">
+        <router-link to="/main-profile" class="nav-right-icon">
           <img src="@assets/user.svg" alt="" />
-        </div>
+        </router-link>
       </div>
     </div>
   </div>
