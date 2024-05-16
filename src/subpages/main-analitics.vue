@@ -6,57 +6,57 @@
       <div class="home-text">
         <h1>Statystyki</h1>
       </div>
-      <div class="home-box">
-        <div class="home-box-left">
-          <h2>Aktualna passa</h2>
-          <p>8 dni</p>
+        <div class="home-box">
+          <div class="home-box-left">
+            <h2>Aktualna passa</h2>
+            <p>8 dni</p>
+          </div>
+          <div class="home-box-right">
+            <h2>Nadjłuższa passa</h2>
+            <p>25 dni</p>
+          </div>
         </div>
-        <div class="home-box-right">
-          <h2>Nadjłuższa passa</h2>
-          <p>25 dni</p>
-        </div>
-      </div>
-      <div class="activities">
-        <div class="activities-content" @click="toggleActivities">
-          <div class="activities-top">
-            <h2>Uwzględnione aktywności</h2>
-            <img
+        <div class="activities">
+          <div class="activities-content" @click="toggleActivities">
+            <div class="activities-top">
+              <h2>Uwzględnione aktywności</h2>
+              <img
               :class="{ active: isActivitiesOpen }"
               src="@assets/arrow-down.svg"
               alt=""
-            />
-          </div>
-          <div class="activities-bottom" :class="{ active: isActivitiesOpen }">
-            <div class="activities-item">
-              <div class="activities-item-left">
-                <img src="@assets/square-pink.svg" alt="" />
-                <h2>Krótki spacer</h2>
-              </div>
-              <div class="activities-item-right">
-                <img src="@assets/eye.svg" alt="" />
-              </div>
+              />
             </div>
-            <div class="activities-item">
-              <div class="activities-item-left">
-                <img src="@assets/square-yellow.svg" alt="" />
-                <h2>Przerwa na kawę</h2>
+            <div class="activities-bottom" :class="{ active: isActivitiesOpen }">
+              <div class="activities-item">
+                <div class="activities-item-left">
+                  <img src="@assets/square-pink.svg" alt="" />
+                  <h2>Krótki spacer</h2>
+                </div>
+                <div class="activities-item-right">
+                  <img src="@assets/eye.svg" alt="" />
+                </div>
               </div>
-              <div class="activities-item-right">
-                <img src="@assets/eye.svg" alt="" />
+              <div class="activities-item">
+                <div class="activities-item-left">
+                  <img src="@assets/square-yellow.svg" alt="" />
+                  <h2>Przerwa na kawę</h2>
+                </div>
+                <div class="activities-item-right">
+                  <img src="@assets/eye.svg" alt="" />
+                </div>
               </div>
-            </div>
-            <div class="activities-item">
-              <div class="activities-item-left">
-                <img src="@assets/square-green.svg" alt="" />
-                <h2>Aktywność 3</h2>
-              </div>
-              <div class="activities-item-right">
-                <img src="@assets/eye-closed.svg" alt="" />
+              <div class="activities-item">
+                <div class="activities-item-left">
+                  <img src="@assets/square-green.svg" alt="" />
+                  <h2>Aktywność 3</h2>
+                </div>
+                <div class="activities-item-right">
+                  <img src="@assets/eye-closed.svg" alt="" />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
       <div class="analitics">
         <div class="analitics-top">
           <p>Wyświetl</p>
@@ -164,12 +164,15 @@ export default {
         text-transform: uppercase;
       }
     }
+
+
     .home-box {
       width: 770px;
       margin-left: auto;
       margin-right: auto;
       display: flex;
-      margin-bottom: 2rem;
+      margin-bottom: 4rem;
+      justify-content: center;
       .home-box-left {
         margin-right: 2rem;
         h2 {
@@ -184,6 +187,7 @@ export default {
           text-align: center;
         }
       }
+
       .home-box-right {
         h2 {
           font-size: 16px;
@@ -203,6 +207,8 @@ export default {
       width: 770px;
       margin-left: auto;
       margin-right: auto;
+      display: flex;
+      justify-content: center;
       .activities-content {
         width: 360px;
         background-color: var(--white-opacity);
@@ -314,6 +320,7 @@ export default {
       .home-box {
         display: flex;
         justify-content: center;
+        text-align: center;
         width: 100%;
       }
       .activities {
