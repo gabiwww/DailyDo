@@ -232,7 +232,7 @@ export default {
       padding: 1rem;
       background-color: var(--white-opacity);
       border-radius: 15px;
-      cursor: pointer;
+      // cursor: pointer;
       box-shadow: var(--shadow);
       .box-text {
         margin-bottom: 1rem;

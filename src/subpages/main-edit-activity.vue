@@ -195,9 +195,7 @@ export default {
   watch: {
     "activity.everyday": function (newValue) {
       console.log({ newValue });
-      if (newValue) {
-        this.setAllDays(true);
-      }
+      this.setAllDays(newValue);
     },
   },
 };
@@ -235,7 +233,7 @@ export default {
       padding: 1rem;
       background-color: var(--white-opacity);
       border-radius: 15px;
-      cursor: pointer;
+      // cursor: pointer;
       box-shadow: var(--shadow);
       .box-text {
         margin-bottom: 1rem;
