@@ -4,6 +4,7 @@ import MainPage from "@subpages/main-page.vue";
 import MainActivity from "@subpages/main-activity.vue";
 import MainManage from "@subpages/main-manage.vue";
 import MainAddActivity from "@subpages/main-add-activity.vue";
+import MainEditActivity from "@subpages/main-edit-activity.vue";
 import MainCalendar from "@subpages/main-calendar.vue";
 import MainAnalitics from "@subpages/main-analitics.vue";
 import MainProfile from "@subpages/main-profile.vue";
@@ -45,6 +46,15 @@ const router = createRouter({
       path: "/main-add-activity",
       component: MainAddActivity,
       name: "main-add-activity",
+      meta: {
+        title: "",
+        description: "",
+      },
+    },
+    {
+      path: "/main-edit-activity",
+      component: MainEditActivity,
+      name: "main-edit-activity",
       meta: {
         title: "",
         description: "",

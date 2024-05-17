@@ -10,7 +10,6 @@
       <button class="home-btn" @click="goToRegister">Zarejestruj się</button>
     </div>
     <div class="home-mobile">
-      <MainMobileHeader />
       <div class="mobile-box">
         <p>Witaj w DailyDo!</p>
         <p>
@@ -18,7 +17,9 @@
         </p>
         <div class="mobile-box-buttons">
           <button class="mobile-box-btn" @click="goToLogin">Zaloguj się</button>
-          <button class="mobile-box-btn" @click="goToRegister">Zarejestruj się</button>
+          <button class="mobile-box-btn" @click="goToRegister">
+            Zarejestruj się
+          </button>
         </div>
       </div>
     </div>
@@ -36,18 +37,18 @@ export default {
     const router = useRouter();
 
     const goToRegister = () => {
-      router.push('/main-register');
+      router.push("/main-register");
     };
 
     const goToLogin = () => {
-      router.push('/main-login');
+      router.push("/main-login");
     };
 
     return {
       goToRegister,
-      goToLogin
+      goToLogin,
     };
-  }
+  },
 };
 </script>
 
@@ -58,7 +59,13 @@ export default {
   display: flex;
   align-items: center;
   flex-direction: column;
-  background: url("@assets/bg.png");
+  background: rgb(15, 71, 135);
+  background: linear-gradient(
+    90deg,
+    rgba(15, 71, 135, 0.6) 0%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(15, 71, 135, 0.6) 100%
+  );
   .home-pc {
     height: 100%;
     display: flex;

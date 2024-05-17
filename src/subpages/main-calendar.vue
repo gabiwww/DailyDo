@@ -190,7 +190,13 @@ export default {
   height: 1024px;
   align-items: center;
   flex-direction: column;
-  background: url("@assets/bg2.png");
+  background: rgb(15, 71, 135);
+  background: linear-gradient(
+    90deg,
+    rgba(15, 71, 135, 0.6) 0%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(15, 71, 135, 0.6) 100%
+  );
   position: relative;
   .home-content {
     width: 95%;

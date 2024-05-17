@@ -4,7 +4,7 @@
     <MainMobileHeader />
     <div class="home-content">
       <div class="home-text">
-        <h1>Nowa aktywność</h1>
+        <h1>Edycja aktywności</h1>
       </div>
       <div class="home-box">
         <div class="box-text">
@@ -195,11 +195,14 @@ export default {
   watch: {
     "activity.everyday": function (newValue) {
       console.log({ newValue });
-      this.setAllDays(newValue);
+      if (newValue) {
+        this.setAllDays(true);
+      }
     },
   },
 };
 </script>
+
 <style lang="scss" scoped>
 .home {
   width: 100%;

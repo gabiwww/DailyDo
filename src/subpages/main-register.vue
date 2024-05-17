@@ -13,14 +13,28 @@
             <input type="password" placeholder="Hasło" v-model="password" />
           </div>
           <div class="box-input confirm-box">
-            <input class="confirm-input" type="password" placeholder="Powtórz hasło" v-model="confirmPassword" />
+            <input
+              class="confirm-input"
+              type="password"
+              placeholder="Powtórz hasło"
+              v-model="confirmPassword"
+            />
             <p class="error-text" v-if="passwordError">{{ passwordError }}</p>
           </div>
           <div class="box-button">
-            <button :style="{ color: isDisabled ? 'gray' : 'white' }" class="box-btn" type="submit" :disabled="isDisabled">Zarejestruj się</button>
+            <button
+              :style="{ color: isDisabled ? 'gray' : 'white' }"
+              class="box-btn"
+              type="submit"
+              :disabled="isDisabled"
+            >
+              Zarejestruj się
+            </button>
           </div>
           <div class="box-button back-button">
-            <button class="box-btn" @click="goBackToMainPage">Wróć do strony głównej</button>
+            <button class="box-btn" @click="goBackToMainPage">
+              Wróć do strony głównej
+            </button>
           </div>
         </form>
       </div>
@@ -34,16 +48,16 @@ import { useRouter } from "vue-router";
 export default {
   data() {
     return {
-      username: '',
-      password: '',
-      confirmPassword: '',
-      passwordError: ''
+      username: "",
+      password: "",
+      confirmPassword: "",
+      passwordError: "",
     };
   },
   computed: {
     isDisabled() {
       return this.password !== this.confirmPassword;
-    }
+    },
   },
   watch: {
     password() {
@@ -55,20 +69,20 @@ export default {
   },
   methods: {
     checkPasswords() {
-      this.passwordError = this.isDisabled ? 'Hasła nie są zgodne' : '';
+      this.passwordError = this.isDisabled ? "Hasła nie są zgodne" : "";
     },
     async register() {
       if (this.isDisabled) {
-        this.passwordError = 'Hasła nie są zgodne';
+        this.passwordError = "Hasła nie są zgodne";
         return;
       } else {
-        this.passwordError = '';
+        this.passwordError = "";
       }
 
-      const response = await fetch('http://localhost:3001/auth/register', {
-        method: 'POST',
+      const response = await fetch("http://localhost:3001/auth/register", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           username: this.username,
@@ -77,21 +91,21 @@ export default {
       });
 
       if (response.ok) {
-        this.username = '';
-        this.password = '';
-        this.confirmPassword = '';
-        this.$router.push('/main-login');
+        this.username = "";
+        this.password = "";
+        this.confirmPassword = "";
+        this.$router.push("/main-login");
       } else {
-        this.username = '';
-        this.password = '';
-        this.confirmPassword = '';
-        alert('Registration failed');
+        this.username = "";
+        this.password = "";
+        this.confirmPassword = "";
+        alert("Registration failed");
       }
     },
     goBackToMainPage() {
-      this.$router.push('/');
-    }
-  }
+      this.$router.push("/");
+    },
+  },
 };
 </script>
 
@@ -111,7 +125,13 @@ export default {
   height: 1024px;
   align-items: center;
   flex-direction: column;
-  background: url("@assets/bg2.png");
+  background: rgb(15, 71, 135);
+  background: linear-gradient(
+    90deg,
+    rgba(15, 71, 135, 0.6) 0%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(15, 71, 135, 0.6) 100%
+  );
   .home-content {
     .home-text {
       padding-top: 2rem;

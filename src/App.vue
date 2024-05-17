@@ -27,7 +27,6 @@ body {
 }
 
 .main {
-  max-width: 1440px;
   width: 100%;
   height: 1024px;
   margin-inline: auto;
