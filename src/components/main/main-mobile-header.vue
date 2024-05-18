@@ -25,10 +25,11 @@
   <div class="mobile-header-main-menu" :class="{ active: isMenuOpen }">
     <div class="mobile-header-menu-content">
       <div class="mobile-header-menu-link">
-        <a href="#">Aktywności</a>
+         <router-link to="/main-activity">Aktywności</router-link>
       </div>
-      <div class="mobile-header-menu-link"><a href="#">Kalendarz</a></div>
-      <div class="mobile-header-menu-link"><a href="#">Statystyki</a></div>
+      <div class="mobile-header-menu-link">
+        <router-link to="/main-analitics">Statystyki</router-link>
+      </div>
     </div>
   </div>
 </template>

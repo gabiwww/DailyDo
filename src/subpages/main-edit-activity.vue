@@ -12,7 +12,7 @@
         </div>
         <div class="box-input">
           <input
-            v-model="activity.title"
+            v-model="this.activity.title"
             type="text"
             placeholder="wpisz nazwę aktywności"
           />
@@ -22,7 +22,7 @@
         </div>
         <div class="box-input">
           <input
-            v-model="activity.note"
+            v-model="this.activity.note"
             type="text"
             placeholder="wpisz dodatkowe informacje"
           />
@@ -71,6 +71,14 @@
                 <h3>Piątki</h3>
                 <input type="checkbox" v-model="activity.days.friday.checked" />
               </div>
+              <div class="box-cal-item">
+                <h3>Soboty</h3>
+                <input type="checkbox" v-model="activity.days.saturday.checked" />
+              </div>
+               <div class="box-cal-item">
+                <h3>Niedziela</h3>
+                <input type="checkbox" v-model="activity.days.sunday.checked" />
+              </div>
             </div>
           </div>
           <div class="home-box-right">
@@ -113,7 +121,7 @@ export default {
     MainHeader,
     MainMobileHeader,
   },
-  data() {
+    data() {
     return {
       activity: {
         title: "",
@@ -122,28 +130,54 @@ export default {
         days: {
           monday: {
             name: "Poniedziałek",
+            key: "MONDAY",
             checked: false,
           },
           tuesday: {
             name: "Wtorek",
+            key: "TUESDAY",
             checked: false,
           },
           wednesday: {
             name: "Środa",
+            key: "WEDNESDAY",
             checked: false,
           },
           thursday: {
             name: "Czwartek",
+            key: "THURSDAY",
             checked: false,
           },
           friday: {
             name: "Piątek",
+            key: "FRIDAY",
+            checked: false,
+          },
+          saturday: {
+            name: "Sobota",
+            key: "SATURDAY",
+            checked: false,
+          },
+          sunday: {
+            name: "Niedziela",
+            key: "SUNDAY",
             checked: false,
           },
         },
         time: "12:00",
       },
     };
+  },
+  async mounted() {
+    try {
+      const id = this.$route.params.id;
+      const response = await api({ url: "/habit/"+ id, method: "GET" });
+      const data = await response.json();
+      this.activity.title = data.name;
+      this.activity.note = data.note;
+    } catch (error) {
+      console.error(error);
+    }
   },
   methods: {
     async editActivity(id) {
@@ -158,7 +192,23 @@ export default {
           .filter((day) => days[day].checked)
           .map((day) => days[day].name);
       };
+const getDaysByKey = () => {
+        if (this.activity.everyday) {
+          return ['SUNDAY',
+      'MONDAY',
+      'TUESDAY',
+      'WEDNESDAY',
+      'THURSDAY',
+      'FRIDAY',
+      'SATURDAY',];
+        }
 
+        const days = this.activity.days;
+
+        return Object.keys(days)
+          .filter((day) => days[day].checked)
+          .map((day) => days[day].key);
+      };
       try {
         const response = await api({
           url: "/habits",
@@ -167,7 +217,7 @@ export default {
             id: id,
             name: this.activity.title,
             note: this.activity.note,
-            days: getDays(),
+            days: getDaysByKey(),
             hour: this.activity.time,
           },
         });

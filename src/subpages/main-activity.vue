@@ -58,7 +58,22 @@ export default {
       const response = await api({ url: "/habits", method: "GET" });
       const data = await response.json();
 
-      this.activities = data?.habits.map((habit) => ({
+      this.activities = data?.habits.filter((item)=>{
+        const date = new Date();
+        const daysOfWeek = [
+          'SUNDAY',
+          'MONDAY',
+          'TUESDAY',
+          'WEDNESDAY',
+          'THURSDAY',
+          'FRIDAY',
+          'SATURDAY',
+        ];
+        const currentDayOfWeek = daysOfWeek[date.getDay()];
+        const daysUpper = item.days.map((day)=>day.toUpperCase());
+       if(daysUpper.includes(currentDayOfWeek)){return true} else {return false}
+
+        }).map((habit) => ({
         title: habit.name,
         schedule:
           habit.days.length === 7

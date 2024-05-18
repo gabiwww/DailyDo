@@ -112,40 +112,40 @@ export default {
       chartData: {
         year: {
           labels: [
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December",
+            "Czerwiec",
+            "Lipiec",
+            "Sierpień",
+            "Wrzesień",
+            "Październik",
+            "Listopad",
+            "Grudzień",
+            "Styczeń",
+            "Luty",
+            "Marzec",
+            "Kwiecień",
+            "Maj",
           ],
-          data: [],
+          data: [null, null, null, 40, 50, 60, 10, 20, 0, 60, 70, 75],
         },
         sixMonths: {
-          labels: ["January", "February", "March", "April", "May", "June"],
-          data: [],
+          labels: ["Grudzień","Styczeń", "Luty", "Marzec", "Kwiecień", "Maj"],
+          data: [10, 20, 30, 40, 50, 60],
         },
         month: {
-          labels: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"],
-          data: [],
+          labels: ["Tydzień 5", "Tydzień 4", "Tydzień 3", "Tydzień 2", "Ten tydzień"],
+          data: [30, 10, 20, 100, 80],
         },
         week: {
           labels: [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday",
+            "Niedziela",
+            "Poniedziałek",
+            "Wtorek",
+            "Środa",
+            "Czwartek",
+            "Piątek",
+            "Sobota",
           ],
-          data: [],
+          data: [0,0,100,100,0,100,0],
         },
       },
     };
@@ -163,13 +163,13 @@ export default {
 
       let newData = [];
       if (type === "year") {
-        newData = Object.values(this.data.months).slice(0, 12);
+        newData = chartInfo.data.slice(0, 12);
       } else if (type === "sixMonths") {
-        newData = Object.values(this.data.months).slice(0, 6);
+        newData = chartInfo.data.slice(0, 6);
       } else if (type === "month") {
-        newData = Object.values(this.data.weeks).slice(0, 5);
+        newData = chartInfo.data.slice(0, 5);
       } else if (type === "week") {
-        newData = Object.values(this.data.days);
+        newData = chartInfo.data;
       }
 
       this.chart.data.datasets[0].data = newData;
@@ -187,6 +187,7 @@ export default {
       const fetchedData = await response.json();
 
       this.data = fetchedData;
+
       this.displayChart(this.selectedChart);
 
     } catch (error) {
@@ -197,7 +198,7 @@ export default {
     this.chart = new Chart(this.$refs.chart, {
       type: "line",
       data: {
-        labels: [],
+        labels: ["Grudzień","Styczeń", "Luty", "Marzec", "Kwiecień", "Maj"],
         datasets: [
           {
             data: [20, 40, 20, 100, 60, 80],
