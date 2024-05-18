@@ -52,7 +52,7 @@ const router = createRouter({
       },
     },
     {
-      path: "/main-edit-activity",
+      path: "/main-edit-activity/:id",
       component: MainEditActivity,
       name: "main-edit-activity",
       meta: {

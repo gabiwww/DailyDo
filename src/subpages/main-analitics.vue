@@ -61,10 +61,30 @@
       <div class="analitics">
         <div class="analitics-top">
           <p>Wyświetl</p>
-          <a href="#" class="active">Ostatni rok</a>
-          <a href="#">Ostatnie pół roku</a>
-          <a href="#">Ostatni miesiąc</a>
-          <a href="#">Ostatni tydzień</a>
+          <a
+            href="#"
+            @click.prevent="displayChart('year')"
+            :class="{ active: selectedChart === 'year' }"
+            >Ostatni rok</a
+          >
+          <a
+            href="#"
+            @click.prevent="displayChart('sixMonths')"
+            :class="{ active: selectedChart === 'sixMonths' }"
+            >Ostatnie pół roku</a
+          >
+          <a
+            href="#"
+            @click.prevent="displayChart('month')"
+            :class="{ active: selectedChart === 'month' }"
+            >Ostatni miesiąc</a
+          >
+          <a
+            href="#"
+            @click.prevent="displayChart('week')"
+            :class="{ active: selectedChart === 'week' }"
+            >Ostatni tydzień</a
+          >
         </div>
         <canvas ref="chart"></canvas>
       </div>
@@ -76,6 +96,7 @@
 import MainHeader from "@main-components/main-header.vue";
 import MainMobileHeader from "@main-components/main-mobile-header.vue";
 import { Chart, registerables } from "chart.js";
+import { api } from "../lib/api";
 
 export default {
   components: {
@@ -83,29 +104,100 @@ export default {
     MainMobileHeader,
   },
   data() {
+    this.myChart = null;
     return {
+      data: null,
       isActivitiesOpen: false,
-      chart: null,
+      selectedChart: "year",
+      chartData: {
+        year: {
+          labels: [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+          ],
+          data: [],
+        },
+        sixMonths: {
+          labels: ["January", "February", "March", "April", "May", "June"],
+          data: [],
+        },
+        month: {
+          labels: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"],
+          data: [],
+        },
+        week: {
+          labels: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+          ],
+          data: [],
+        },
+      },
     };
   },
+
   methods: {
     toggleActivities() {
       this.isActivitiesOpen = !this.isActivitiesOpen;
     },
+
+    displayChart(type) {
+      this.selectedChart = type;
+      const chartInfo = this.chartData[type];
+      this.chart.data.labels = chartInfo.labels;
+
+      let newData = [];
+      if (type === "year") {
+        newData = Object.values(this.data.months).slice(0, 12);
+      } else if (type === "sixMonths") {
+        newData = Object.values(this.data.months).slice(0, 6);
+      } else if (type === "month") {
+        newData = Object.values(this.data.weeks).slice(0, 5);
+      } else if (type === "week") {
+        newData = Object.values(this.data.days);
+      }
+
+      this.chart.data.datasets[0].data = newData;
+
+      this.chart.update();
+    },
   },
-  mounted() {
+
+  async mounted() {
+    try {
+      const response = await api({
+        url: "/statistics/${habit}",
+        method: "GET",
+      });
+      const fetchedData = await response.json();
+
+      this.data = fetchedData;
+      this.displayChart(this.selectedChart);
+
+    } catch (error) {
+      console.log(error);
+    }
+
     Chart.register(...registerables);
     this.chart = new Chart(this.$refs.chart, {
       type: "line",
       data: {
-        labels: [
-          "kwiecień",
-          "maj",
-          "czerwiec",
-          "lipiec",
-          "sierpień",
-          "wrzesień",
-        ],
+        labels: [],
         datasets: [
           {
             data: [20, 40, 20, 100, 60, 80],
@@ -113,13 +205,6 @@ export default {
             pointBackgroundColor: "#FFB800",
             pointRadius: 8,
             fill: false,
-          },
-          {
-            data: [60, 80, 60, 40, 20, 40],
-            borderColor: "#C200FF",
-            pointBackgroundColor: "#C200FF",
-            fill: false,
-            pointRadius: 8,
           },
         ],
       },
@@ -137,6 +222,7 @@ export default {
         },
       },
     });
+    this.displayChart(this.selectedChart);
   },
 };
 </script>

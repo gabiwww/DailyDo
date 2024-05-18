@@ -29,10 +29,10 @@
             <img src="@assets/analitics.svg" alt="" />
           </div>
           <div class="box-bottom-right">
-            <router-link to="/main-edit-activity">
+            <router-link :to="{path: '/main-edit-activity/' + activity.id}">
               <img src="@assets/edit.svg" alt="" />
             </router-link>
-            <img src="@assets/trash.svg" alt="" @click="deleteOption" />
+            <img src="@assets/trash.svg" alt="" @click="deleteOption(Number(activity.id))" />
           </div>
         </div>
       </div>
@@ -71,6 +71,7 @@ export default {
       const data = await response.json();
 
       this.activities = data?.habits.map((habit) => ({
+        id: habit.id,
         title: habit.name,
         schedule:
           habit.days.length === 7
@@ -93,13 +94,27 @@ export default {
     backToActivities() {
       this.$router.push("/main-activity");
     },
-    deleteOption() {
+    async deleteOption(id) {
       if (confirm("Czy chcesz usunąć aktywność?")) {
         console.log("Tak");
-        //Tutaj funkcja back-end, która powinna usunąć
+            try {
+        const response = await api({
+          url: `/habit/${id}`,
+          method: "DELETE",
+        });
+
+        if (!response.ok) throw new Error("Network response was not ok");
+        const data = await response.json();
+        console.log(data);
+        this.$router.push("/main-activity");
+      } catch (error) {
+        console.error(
+          "There has been a problem with your fetch operation:",
+          error
+        );
+      }
       } else {
         console.log("Nie");
-        //Tutaj funkcja back-end, która powinna anulować
       }
     },
   },

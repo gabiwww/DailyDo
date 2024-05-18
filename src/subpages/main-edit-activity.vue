@@ -93,7 +93,7 @@
         </div>
       </div>
       <div class="home-bottom">
-        <button class="home-bottom-btn" @click="saveActivity">Zapisz</button>
+        <button class="home-bottom-btn" @click="editActivity(Number($route.params.id))">Zapisz</button>
       </div>
       <div class="home-list" style="cursor: pointer" @click="backToActivities">
         <img src="@assets/arrow-left.svg" alt="" />
@@ -146,7 +146,7 @@ export default {
     };
   },
   methods: {
-    async saveActivity() {
+    async editActivity(id) {
       const getDays = () => {
         if (this.activity.everyday) {
           return ["Codziennie"];
@@ -162,8 +162,9 @@ export default {
       try {
         const response = await api({
           url: "/habits",
-          method: "POST",
+          method: "PUT",
           body: {
+            id: id,
             name: this.activity.title,
             note: this.activity.note,
             days: getDays(),
