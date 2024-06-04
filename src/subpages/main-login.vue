@@ -9,7 +9,21 @@
           <input type="text" placeholder="Login" v-model="username" />
         </div>
         <div class="box-input">
-          <input type="password" placeholder="Hasło" v-model="password" />
+          <input :type="inputType" placeholder="Hasło" v-model="password" />
+          <img
+            class="eye-icon"
+            v-if="!showPassword"
+            src="@assets/eye.svg"
+            alt="Hide Password"
+            @click="togglePassword()"
+          />
+          <img
+            class="eye-icon"
+            v-else
+            src="@assets/eye-closed.svg"
+            alt="Show Password"
+            @click="togglePassword()"
+          />
         </div>
         <div class="box-button">
           <button class="box-btn" @click="login">Zaloguj się</button>
@@ -32,9 +46,19 @@ export default {
     return {
       username: "",
       password: "",
+      showPassword: false,
     };
   },
+  computed: {
+    inputType() {
+      return this.showPassword ? "text" : "password";
+    },
+  },
   methods: {
+    togglePassword() {
+      this.showPassword = !this.showPassword;
+      console.log("password?", this.showPassword);
+    },
     async login() {
       const response = await api({
         url: "/auth/login",
@@ -50,7 +74,7 @@ export default {
         const accessToken = data.access_token;
         localStorage.setItem("accessToken", accessToken);
 
-        this.$router.push("/main-activity");
+        this.$router.push("/activity");
       } else {
         this.username = "";
         this.password = "";
@@ -99,6 +123,7 @@ export default {
       cursor: pointer;
       box-shadow: var(--shadow);
       .box-input {
+        position: relative;
         input {
           width: 100%;
           border-radius: 15px;
@@ -108,9 +133,17 @@ export default {
           font-weight: 700;
           color: var(--light-blue);
           padding-left: 1rem;
+          padding-right: 3rem; /* Add padding for the icon */
           margin-bottom: 2rem;
           padding-top: 0.5rem;
           padding-bottom: 0.5rem;
+        }
+        .eye-icon {
+          position: absolute;
+          top: 28%; /* Adjust the position vertically */
+          right: 1rem; /* Adjust the position horizontally */
+          transform: translateY(-50%);
+          cursor: pointer;
         }
       }
       .box-button {

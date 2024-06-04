@@ -15,24 +15,33 @@
       >
         <div :class="{ 'box-top': true, active: isActive[index] }">
           <h2>{{ activity.title }}</h2>
-          <img
-            :class="{ active: isActive[index] }"
-            src="@assets/arrow-down.svg"
-            alt=""
-          />
+         
         </div>
         <div class="box-mid">
           <p>{{ activity.schedule }}</p>
         </div>
-        <div class="box-bottom" :class="{ active: isActive[index] }">
+        <div class="box-bottom" >
           <div class="box-bottom-left">
-            <img src="@assets/analitics.svg" alt="" />
+            
           </div>
           <div class="box-bottom-right">
-            <router-link :to="{path: '/main-edit-activity/' + activity.id}">
+            <router-link :to="{ path: '/edit-activity/' + activity.id }">
               <img src="@assets/edit.svg" alt="" />
             </router-link>
-            <img src="@assets/trash.svg" alt="" @click="deleteOption(Number(activity.id))" />
+            <img
+              src="@assets/trash.svg"
+              alt=""
+              @click.stop="showConfirmationModal(activity.id)"
+            />
+            <div v-if="visibleConfirmation" class="modal-backdrop">
+              <div class="confirmation-modal">
+                <p>Czy na pewno chcesz usunąć tę aktywność?</p>
+                <div>
+                  <button class="conf-btn" @click="deleteActivity">Tak</button>
+                  <button class="conf-btn" @click="cancelDelete">Nie</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -63,6 +72,7 @@ export default {
     return {
       isActive: [],
       activities: [],
+      visibleConfirmation: false,
     };
   },
   async mounted() {
@@ -89,39 +99,81 @@ export default {
       this.isActive[index] = !this.isActive[index];
     },
     addActivity() {
-      this.$router.push("/main-add-activity");
+      this.$router.push("/add-activity");
     },
     backToActivities() {
-      this.$router.push("/main-activity");
+      this.$router.push("/activity");
     },
-    async deleteOption(id) {
-      if (confirm("Czy chcesz usunąć aktywność?")) {
-        console.log("Tak");
-            try {
+    async deleteActivity() {
+      try {
         const response = await api({
-          url: `/habit/${id}`,
+          url: `/habit/${this.selectedActivityId}`,
           method: "DELETE",
         });
 
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
         console.log(data);
-        this.$router.push("/main-activity");
+        this.$router.push("/activity");
       } catch (error) {
         console.error(
           "There has been a problem with your fetch operation:",
           error
         );
+      } finally {
+        this.visibleConfirmation = false;
+        this.selectedActivityId = null;
       }
-      } else {
-        console.log("Nie");
-      }
+    },
+    cancelDelete() {
+      this.visibleConfirmation = false;
+      this.selectedActivityId = null;
+    },
+    showConfirmationModal(activityId) {
+      this.visibleConfirmation = true;
+      this.selectedActivityId = activityId;
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.confirmation-modal {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.conf-btn{
+  border: none;
+  padding: 10px;
+  width: 100px;
+  border-radius: 25px;
+  color: white;
+  font-weight: bold;
+  background-color: #0E4888;
+}
+
+.confirmation-modal p {
+  margin-bottom: 10px;
+}
+
+.confirmation-modal button {
+  margin-right: 10px;
+  cursor: pointer;
+}
 .home {
   width: 100%;
   height: 1024px;
@@ -189,8 +241,9 @@ export default {
         margin-bottom: 1rem;
       }
       .box-bottom {
-        display: none;
-        .box-bottom-right {
+        display: flex;
+        justify-content: flex-end;
+               .box-bottom-right {
           img:not(:last-child) {
             margin-right: 1rem;
           }

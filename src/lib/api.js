@@ -1,7 +1,7 @@
 export const api = ({ url, method = 'GET', body }) => {
 	const token = localStorage.getItem('accessToken');
 
-	return fetch(`http://localhost:3001${url}`, {
+	return fetch(`http://localhost:3002${url}`, {
 		method: method,
 		headers: {
 			'Content-Type': 'application/json',

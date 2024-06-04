@@ -22,37 +22,23 @@
             <h2>Uwzględnione aktywności</h2>
             <img
               :class="{ active: isActivitiesOpen }"
-              src="@assets/arrow-down.svg"
+              src="@/assets/arrow-down.svg"
               alt=""
               @click="toggleActivities"
             />
           </div>
           <div class="activities-bottom" :class="{ active: isActivitiesOpen }">
-            <div class="activities-item">
+            <div v-for="(habit, index) in data" :key="habit.id" class="activities-item">
               <div class="activities-item-left">
-                <img src="@assets/square-pink.svg" alt="" />
-                <h2>Krótki spacer</h2>
+                <div :style="{ backgroundColor: getColor(index) }" class="color-box"></div>
+                <h2>{{ habit.name }}</h2>
               </div>
               <div class="activities-item-right">
-                <img src="@assets/eye.svg" alt="" />
-              </div>
-            </div>
-            <div class="activities-item">
-              <div class="activities-item-left">
-                <img src="@assets/square-yellow.svg" alt="" />
-                <h2>Przerwa na kawę</h2>
-              </div>
-              <div class="activities-item-right">
-                <img src="@assets/eye.svg" alt="" />
-              </div>
-            </div>
-            <div class="activities-item">
-              <div class="activities-item-left">
-                <img src="@assets/square-green.svg" alt="" />
-                <h2>Aktywność 3</h2>
-              </div>
-              <div class="activities-item-right">
-                <img src="@assets/eye-closed.svg" alt="" />
+                <img
+                  :src="habit.visible ? eyeClosed : eyeOpen"
+                  alt="Visibility Icon"
+                  @click="toggleVisibility(habit)"
+                />
               </div>
             </div>
           </div>
@@ -97,6 +83,8 @@ import MainHeader from "@main-components/main-header.vue";
 import MainMobileHeader from "@main-components/main-mobile-header.vue";
 import { Chart, registerables } from "chart.js";
 import { api } from "../lib/api";
+import eyeOpen from '@/assets/eye.svg';
+import eyeClosed from '@/assets/eye-closed.svg';
 
 export default {
   components: {
@@ -104,11 +92,14 @@ export default {
     MainMobileHeader,
   },
   data() {
-    this.myChart = null;
     return {
+      myChart: null,
       data: null,
+      activities: [],
       isActivitiesOpen: false,
       selectedChart: "year",
+      eyeOpen: eyeOpen,
+      eyeClosed: eyeClosed,
       chartData: {
         year: {
           labels: [
@@ -125,15 +116,36 @@ export default {
             "Kwiecień",
             "Maj",
           ],
-          data: [null, null, null, 40, 50, 60, 10, 20, 0, 60, 70, 75],
+          data: [
+            [30, 40, 50, 60, 70, 80, 90, 20, 10, 40, 50, 60], // MEETING
+            [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120], // SPOTKANIE
+            [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160], // KAWA
+            [20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130], // SPOTKAN1
+            [15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125], // SPOTKANIE2
+            [5, 15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115] // SPOTKANIE3
+          ]
         },
         sixMonths: {
-          labels: ["Grudzień","Styczeń", "Luty", "Marzec", "Kwiecień", "Maj"],
-          data: [10, 20, 30, 40, 50, 60],
+          labels: ["Grudzień", "Styczeń", "Luty", "Marzec", "Kwiecień", "Maj"],
+          data: [
+            [10, 20, 30, 40, 50, 60], // MEETING
+            [5, 15, 25, 35, 45, 55], // SPOTKANIE
+            [25, 35, 45, 55, 65, 75], // KAWA
+            [10, 15, 20, 25, 30, 35], // SPOTKAN1
+            [20, 25, 30, 35, 40, 45], // SPOTKANIE2
+            [15, 20, 25, 30, 35, 40] // SPOTKANIE3
+          ]
         },
         month: {
           labels: ["Tydzień 5", "Tydzień 4", "Tydzień 3", "Tydzień 2", "Ten tydzień"],
-          data: [30, 10, 20, 100, 80],
+          data: [
+            [5, 10, 15, 20, 25], // MEETING
+            [10, 20, 30, 40, 50], // SPOTKANIE
+            [15, 30, 45, 60, 75], // KAWA
+            [20, 40, 60, 80, 100], // SPOTKAN1
+            [10, 25, 40, 55, 70], // SPOTKANIE2
+            [5, 20, 35, 50, 65] // SPOTKANIE3
+          ]
         },
         week: {
           labels: [
@@ -145,51 +157,75 @@ export default {
             "Piątek",
             "Sobota",
           ],
-          data: [0,0,100,100,0,100,0],
+          data: [
+            [10, 20, 30, 40, 50, 60, 70], // MEETING
+            [5, 15, 25, 35, 45, 55, 65], // SPOTKANIE
+            [15, 30, 45, 60, 75, 90, 105], // KAWA
+            [10, 20, 30, 40, 50, 60, 70], // SPOTKAN1
+            [5, 15, 25, 35, 45, 55, 65], // SPOTKANIE2
+            [0, 10, 20, 30, 40, 50, 60] // SPOTKANIE3
+          ]
         },
       },
+      colors: ["#FFB800", "#FF5733", "#33FF57", "#3357FF", "#FF33A8", "#A833FF", "#33FFF3"]
     };
   },
-
+  
   methods: {
     toggleActivities() {
       this.isActivitiesOpen = !this.isActivitiesOpen;
     },
 
     displayChart(type) {
+      if (!this.data) return;
+
       this.selectedChart = type;
       const chartInfo = this.chartData[type];
       this.chart.data.labels = chartInfo.labels;
 
-      let newData = [];
-      if (type === "year") {
-        newData = chartInfo.data.slice(0, 12);
-      } else if (type === "sixMonths") {
-        newData = chartInfo.data.slice(0, 6);
-      } else if (type === "month") {
-        newData = chartInfo.data.slice(0, 5);
-      } else if (type === "week") {
-        newData = chartInfo.data;
-      }
+      const newDatasets = this.data
+        .map((habit, index) => {
+          if (habit.visible) {
+            return {
+              label: habit.name,
+              data: chartInfo.data[index],
+              borderColor: this.getColor(index),
+              pointBackgroundColor: this.getColor(index),
+              pointRadius: 8,
+              fill: false,
+            };
+          }
+          return null;
+        })
+        .filter(dataset => dataset !== null);
 
-      this.chart.data.datasets[0].data = newData;
-
+      this.chart.data.datasets = newDatasets;
       this.chart.update();
     },
+
+    getColor(index) {
+      return this.colors[index % this.colors.length];
+    },
+
+    toggleVisibility(habit) {
+      habit.visible = !habit.visible;
+      this.displayChart(this.selectedChart);
+    }
   },
 
   async mounted() {
     try {
       const response = await api({
-        url: "/statistics/${habit}",
+        url: "/habits",
         method: "GET",
       });
       const fetchedData = await response.json();
-
-      this.data = fetchedData;
+      this.data = fetchedData.habits.map(habit => ({
+        ...habit,
+        visible: true, // ustawiamy pole visible na true dla każdego habit
+      }));
 
       this.displayChart(this.selectedChart);
-
     } catch (error) {
       console.log(error);
     }
@@ -198,16 +234,8 @@ export default {
     this.chart = new Chart(this.$refs.chart, {
       type: "line",
       data: {
-        labels: ["Grudzień","Styczeń", "Luty", "Marzec", "Kwiecień", "Maj"],
-        datasets: [
-          {
-            data: [20, 40, 20, 100, 60, 80],
-            borderColor: "#FFB800",
-            pointBackgroundColor: "#FFB800",
-            pointRadius: 8,
-            fill: false,
-          },
-        ],
+        labels: [],
+        datasets: []
       },
       options: {
         responsive: true,
@@ -337,9 +365,14 @@ export default {
             justify-content: space-between;
             height: 48px;
             align-items: center;
+
             .activities-item-left {
               display: flex;
-              img {
+              align-items: center;
+              margin-right: auto;
+              .color-box {
+                width: 24px;
+                height: 24px;
                 margin-right: 1rem;
               }
               h2 {
@@ -347,6 +380,15 @@ export default {
                 color: var(--blue);
                 font-weight: 700;
                 text-transform: uppercase;
+              }
+            }
+
+            .activities-item-right {
+              display: flex;
+              align-items: center;
+              img {
+                width: 24px;
+                height: 24px;
               }
             }
           }

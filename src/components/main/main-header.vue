@@ -6,10 +6,11 @@
       </div>
       <div class="nav-right">
         <div class="nav-right-links">
-          <router-link to="/main-activity">Aktywności</router-link>
-          <router-link to="/main-analitics">Statystyki</router-link>
+          <router-link to="/activity">Moje Aktywności</router-link>
+          <router-link to="/manage">Zarządzanie aktywnościami</router-link>
+          <router-link to="/analitics">Statystyki</router-link>
         </div>
-        <router-link to="/main-profile" class="nav-right-icon">
+        <router-link to="/profile" class="nav-right-icon">
           <img src="@assets/user.svg" alt="" />
         </router-link>
       </div>

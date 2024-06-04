@@ -37,11 +37,11 @@ export default {
     const router = useRouter();
 
     const goToRegister = () => {
-      router.push("/main-register");
+      router.push("/register");
     };
 
     const goToLogin = () => {
-      router.push("/main-login");
+      router.push("/login");
     };
 
     return {

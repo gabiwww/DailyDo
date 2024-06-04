@@ -121,7 +121,7 @@ export default {
     MainHeader,
     MainMobileHeader,
   },
-    data() {
+  data() {
     return {
       activity: {
         title: "",
@@ -175,11 +175,19 @@ export default {
       const data = await response.json();
       this.activity.title = data.name;
       this.activity.note = data.note;
+      this.activity.time = data.hour;
+      this.updateDaysChecked(data.days)
     } catch (error) {
       console.error(error);
     }
   },
   methods: {
+    updateDaysChecked(receivedDays) {
+      const daysArray = Object.values(this.activity.days);
+      daysArray.forEach(day => {
+        day.checked = receivedDays.includes(day.key);
+      });
+    },
     async editActivity(id) {
       const getDays = () => {
         if (this.activity.everyday) {
@@ -192,15 +200,15 @@ export default {
           .filter((day) => days[day].checked)
           .map((day) => days[day].name);
       };
-const getDaysByKey = () => {
+      const getDaysByKey = () => {
         if (this.activity.everyday) {
           return ['SUNDAY',
-      'MONDAY',
-      'TUESDAY',
-      'WEDNESDAY',
-      'THURSDAY',
-      'FRIDAY',
-      'SATURDAY',];
+            'MONDAY',
+            'TUESDAY',
+            'WEDNESDAY',
+            'THURSDAY',
+            'FRIDAY',
+            'SATURDAY',];
         }
 
         const days = this.activity.days;
@@ -225,7 +233,7 @@ const getDaysByKey = () => {
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
         console.log(data);
-        this.$router.push("/main-activity");
+        this.$router.push("/activity");
       } catch (error) {
         console.error(
           "There has been a problem with your fetch operation:",
@@ -240,7 +248,7 @@ const getDaysByKey = () => {
       }
     },
     backToActivities() {
-      this.$router.push("/main-activity");
+      this.$router.push("/activity");
     },
   },
   watch: {
@@ -413,11 +421,11 @@ const getDaysByKey = () => {
         font-size: 16px;
         font-weight: 700;
         border-radius: 25px;
-        background-color: var(--light-blue);
-        border: 1px solid var(--light-blue);
+        background-color: var(--blue); /* zmienione tło na granatowe */
+        border: 1px solid var(--blue); /* zmieniony kolor obramowania na granatowy */
         color: var(--white);
         margin-bottom: 1rem;
-        box-shadow: var(--shadow);
+        box-shadow: var (--shadow);
         cursor: pointer;
       }
     }

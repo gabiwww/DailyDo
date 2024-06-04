@@ -21,16 +21,16 @@
         />
       </div>
     </div>
-  </div>
-  <div class="mobile-header-main-menu" :class="{ active: isMenuOpen }">
+    <div class="mobile-header-main-menu" :class="{ active: isMenuOpen }">
     <div class="mobile-header-menu-content">
       <div class="mobile-header-menu-link">
-         <router-link to="/main-activity">Aktywności</router-link>
+         <router-link to="/activity">Moje Aktywności</router-link>
       </div>
       <div class="mobile-header-menu-link">
-        <router-link to="/main-analitics">Statystyki</router-link>
+        <router-link to="/analitics">Statystyki</router-link>
       </div>
     </div>
+  </div>
   </div>
 </template>
 

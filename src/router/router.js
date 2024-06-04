@@ -25,7 +25,7 @@ const router = createRouter({
       },
     },
     {
-      path: "/main-activity",
+      path: "/activity",
       component: MainActivity,
       name: "main-activity",
       meta: {
@@ -34,7 +34,7 @@ const router = createRouter({
       },
     },
     {
-      path: "/main-manage",
+      path: "/manage",
       component: MainManage,
       name: "main-manage",
       meta: {
@@ -43,7 +43,7 @@ const router = createRouter({
       },
     },
     {
-      path: "/main-add-activity",
+      path: "/add-activity",
       component: MainAddActivity,
       name: "main-add-activity",
       meta: {
@@ -52,7 +52,7 @@ const router = createRouter({
       },
     },
     {
-      path: "/main-edit-activity/:id",
+      path: "/edit-activity/:id",
       component: MainEditActivity,
       name: "main-edit-activity",
       meta: {
@@ -61,7 +61,7 @@ const router = createRouter({
       },
     },
     {
-      path: "/main-calendar",
+      path: "/calendar",
       component: MainCalendar,
       name: "main-calendar",
       meta: {
@@ -70,7 +70,7 @@ const router = createRouter({
       },
     },
     {
-      path: "/main-analitics",
+      path: "/analitics",
       component: MainAnalitics,
       name: "main-analitics",
       meta: {
@@ -79,7 +79,7 @@ const router = createRouter({
       },
     },
     {
-      path: "/main-profile",
+      path: "/profile",
       component: MainProfile,
       name: "main-profile",
       meta: {
@@ -88,7 +88,7 @@ const router = createRouter({
       },
     },
     {
-      path: "/main-login",
+      path: "/login",
       component: MainLogin,
       name: "main-login",
       meta: {
@@ -97,7 +97,7 @@ const router = createRouter({
       },
     },
     {
-      path: "/main-register",
+      path: "/register",
       component: MainRegister,
       name: "main-register",
       meta: {

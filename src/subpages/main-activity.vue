@@ -4,7 +4,7 @@
     <MainMobileHeader />
     <div class="home-content">
       <div class="home-text">
-        <h1>Aktywności</h1>
+        <h1>Moje Aktywności</h1>
       </div>
       <div
         v-for="(activity, index) in activities"
@@ -13,21 +13,15 @@
       >
         <div :class="{ 'box-top': true, active: isActive[index] }">
           <h2>{{ activity.title }}</h2>
-          <img
-            :class="{ active: isActive[index] }"
-            src="@assets/arrow-down.svg"
-            @click="toggleActive(index)"
-            alt=""
-          />
+          <div class="box-bottom">
+          <input type="checkbox" />
+          <p>{{ activity.note }}</p>
+        </div>
         </div>
         <div class="box-mid">
           <p>{{ activity.schedule }}</p>
         </div>
-        <div class="box-bottom" :class="{ active: isActive[index] }">
-          <input type="checkbox" />
-          <p>{{ activity.note }}</p>
-        </div>
-      </div>
+              </div>
       <div class="home-bottom">
         <button class="home-bottom-btn" @click="manageActivities">
           Zarządzaj aktywnościami
@@ -91,7 +85,7 @@ export default {
       this.isActive[index] = !this.isActive[index];
     },
     manageActivities() {
-      this.$router.push("/main-manage");
+      this.$router.push("/manage");
     },
   },
 };
@@ -157,7 +151,8 @@ export default {
         margin-bottom: 1rem;
       }
       .box-bottom {
-        display: none;
+        display: flex;
+        justify-content: flex-end;
         input {
           width: 20px;
           height: 20px;

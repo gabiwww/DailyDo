@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     goBackToMainProfile() {
-      this.$router.push("/main-profile");
+      this.$router.push("/profile");
     },
     async fetchUserData() {
       // replace with your actual API call
